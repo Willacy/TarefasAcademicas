@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Tarefas Academicas</string>
+    <string name="tarefas">Tarefas</string>
+    <string name="nova">Nova</string>
+    <string name="cursos">Cursos</string>
+    <string name="agenda">Agenda</string>
+    <string name="configuracoes">configurações</string>
+    <string name="config">Config.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/menu_tarefas">
+
+    <fragment
+        android:id="@+id/menu_tarefas"
+        android:name="com.example.tarefasacademicas.fragments.TarefasFragment"
+        android:label="fragment_tarefas"
+        tools:layout="@layout/fragment_tarefas" />
+    <fragment
+        android:id="@+id/menu_cursos"
+        android:name="com.example.tarefasacademicas.fragments.CursosFragment"
+        android:label="fragment_cursos"
+        tools:layout="@layout/fragment_cursos" />
+    <fragment
+        android:id="@+id/menu_agenda"
+        android:name="com.example.tarefasacademicas.fragments.AgendaFragment"
+        android:label="fragment_agenda"
+        tools:layout="@layout/fragment_agenda" />
+</navigation>
