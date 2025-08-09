@@ -1,5 +1,6 @@
 package com.example.tarefasacademicas.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 
 import com.example.tarefasacademicas.R;
+import com.example.tarefasacademicas.databinding.FragmentCursosBinding;
+import com.example.tarefasacademicas.model.Curso;
+import com.example.tarefasacademicas.view.CursoActivity;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +24,10 @@ import com.example.tarefasacademicas.R;
  * create an instance of this fragment.
  */
 public class CursosFragment extends Fragment {
+
+    private FragmentCursosBinding binding;
+    private Curso curso = new Curso();
+    private List<Curso> Cursos = curso.listar();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +72,30 @@ public class CursosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cursos, container, false);
+        binding = FragmentCursosBinding.inflate(inflater, container, false);
+        ArrayAdapter<Curso> adapter = new ArrayAdapter<Curso>(requireContext(), android.R.layout.simple_list_item_1, Cursos);
+        binding.lstCursos.setAdapter(adapter);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.btnNovoCurso.setOnClickListener(v-> {
+            novoCurso();
+        });
+
+    }
+
+    public void novoCurso(){
+        Intent intent = new Intent(getActivity(), CursoActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

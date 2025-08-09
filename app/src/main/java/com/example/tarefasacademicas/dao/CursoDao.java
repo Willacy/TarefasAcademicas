@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.tarefasacademicas.model.Curso;
 
@@ -18,15 +21,21 @@ public class CursoDao {
     // Construtor
     public CursoDao(Context context) {
         BDTarefas banco = new BDTarefas(context);
-        db = banco.getWritableDatabase();
+         db = banco.getWritableDatabase();
     }
 
     // Inserindo um novo curso (CREATE)
     public long inserir(Curso curso) {
-        ContentValues valores = new ContentValues();
-        valores.put("desc_curso", curso.getDesc_curso());
-        valores.put("prof_curso", curso.getProf_curso());
-        return db.insert("curso", null, valores);
+        try{
+            ContentValues valores = new ContentValues();
+            valores.put("desc_curso", curso.getDesc_curso());
+            valores.put("prof_curso", curso.getProf_curso());
+            return db.insert("curso", null, valores);
+        }catch (Exception e){
+            Toast.makeText(curso.getContext(), "Erro ao inserir curso", Toast.LENGTH_SHORT).show();
+            return -1;
+        }
+
     }
 
     // Buscando todos os cursos (READ)
