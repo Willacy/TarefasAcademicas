@@ -71,10 +71,9 @@ public class Curso {
         }
     }
 
-    //Retorna a lista de cursos Cadastrados
-    public List<Curso> listar() {
+    // Listar cursos do banco de dados
+    public List<Curso> listar(Context context) {
         cursoDao = new CursoDao(context);
         return cursoDao.listar();
     }
-
 }

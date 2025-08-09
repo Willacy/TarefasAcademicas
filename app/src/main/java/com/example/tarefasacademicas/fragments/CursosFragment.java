@@ -16,6 +16,7 @@ import com.example.tarefasacademicas.databinding.FragmentCursosBinding;
 import com.example.tarefasacademicas.model.Curso;
 import com.example.tarefasacademicas.view.CursoActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +28,6 @@ public class CursosFragment extends Fragment {
 
     private FragmentCursosBinding binding;
     private Curso curso = new Curso();
-    private List<Curso> Cursos = curso.listar();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,8 +73,7 @@ public class CursosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCursosBinding.inflate(inflater, container, false);
-        ArrayAdapter<Curso> adapter = new ArrayAdapter<Curso>(requireContext(), android.R.layout.simple_list_item_1, Cursos);
-        binding.lstCursos.setAdapter(adapter);
+        listarCursos();
         return binding.getRoot();
     }
 
@@ -82,20 +81,37 @@ public class CursosFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.btnNovoCurso.setOnClickListener(v-> {
+        binding.btnNovoCurso.setOnClickListener(v -> {
             novoCurso();
         });
-
     }
 
-    public void novoCurso(){
+    public void novoCurso() {
         Intent intent = new Intent(getActivity(), CursoActivity.class);
         startActivity(intent);
+    }
+
+    public void listarCursos(){
+        List<Curso> lista = curso.listar(requireContext());
+        List<String> listaCursos = new ArrayList<>();
+        while(!lista.isEmpty()){
+            listaCursos.add(lista.get(0).getDesc_curso());
+            lista.remove(0);
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), R.layout.item_list, listaCursos);
+        binding.lstCursos.setAdapter(adapter);
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        listarCursos();
     }
 }

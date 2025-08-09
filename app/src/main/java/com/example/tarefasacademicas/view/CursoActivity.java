@@ -20,7 +20,6 @@ import com.example.tarefasacademicas.model.Curso;
 public class CursoActivity extends AppCompatActivity {
 
     private ActivityCursoBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
