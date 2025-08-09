@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:layout_marginBottom="3dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical"
+        android:layout_gravity="start">
+
+        <TextView
+            android:id="@+id/txtItem1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="item1"
+            android:textColor="@color/cor_menu"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtItem2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="item2"
+            android:textColor="@color/cor_menu"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_gravity="center">
+
+        <ImageButton
+            android:id="@+id/btnEditar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/ic_edit"
+            android:backgroundTint="@color/cor_menu"
+            android:contentDescription="@string/todo"
+            android:paddingHorizontal="12dp"
+            android:layout_marginRight="8dp"/>
+
+        <ImageButton
+            android:id="@+id/btnDeletar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/ic_delete"
+            android:backgroundTint="@color/cor_menu"
+            android:contentDescription="@string/todo"
+            android:paddingHorizontal="12dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

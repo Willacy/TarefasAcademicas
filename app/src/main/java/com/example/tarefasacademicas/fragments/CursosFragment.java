@@ -12,6 +12,7 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 
 import com.example.tarefasacademicas.R;
+import com.example.tarefasacademicas.adpter.CursoAdapter;
 import com.example.tarefasacademicas.databinding.FragmentCursosBinding;
 import com.example.tarefasacademicas.model.Curso;
 import com.example.tarefasacademicas.view.CursoActivity;
@@ -93,12 +94,15 @@ public class CursosFragment extends Fragment {
 
     public void listarCursos(){
         List<Curso> lista = curso.listar(requireContext());
-        List<String> listaCursos = new ArrayList<>();
+
+        /*List<String> listaCursos = new ArrayList<>();
         while(!lista.isEmpty()){
             listaCursos.add(lista.get(0).getDesc_curso());
+            listaCursos.add(lista.get(0).getProf_curso());
             lista.remove(0);
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), R.layout.item_list, listaCursos);
+        }*/
+
+        CursoAdapter adapter = new CursoAdapter(requireContext(), lista);
         binding.lstCursos.setAdapter(adapter);
 
     }
