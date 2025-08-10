@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.tarefasacademicas.R;
 import com.example.tarefasacademicas.adpter.CursoAdapter;
@@ -89,6 +90,7 @@ public class CursosFragment extends Fragment {
 
     public void novoCurso() {
         Intent intent = new Intent(getActivity(), CursoActivity.class);
+        intent.putExtra("crud", 0);
         startActivity(intent);
     }
 
@@ -103,6 +105,7 @@ public class CursosFragment extends Fragment {
         }*/
 
         CursoAdapter adapter = new CursoAdapter(requireContext(), lista);
+
         binding.lstCursos.setAdapter(adapter);
 
     }

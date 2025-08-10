@@ -20,13 +20,33 @@ import com.example.tarefasacademicas.model.Curso;
 public class CursoActivity extends AppCompatActivity {
 
     private ActivityCursoBinding binding;
+
+    private int crud;
+
+    private Intent intent = getIntent();
+
+    public int getCrud() {
+        return this.crud;
+    }
+    public void setCrud(int crud) {
+        this.crud = crud;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCursoBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
-
+        this.setCrud(intent.getIntExtra("crud", 0));
+        if (this.getCrud() == 1) {
+            binding.btnSalvarCurso.setText("Atualizar");
+        }
         binding.btnVoltar.setOnClickListener(v -> {
             finish();
         });
@@ -43,7 +63,11 @@ public class CursoActivity extends AppCompatActivity {
         });
 
         binding.btnSalvarCurso.setOnClickListener(v -> {
-            salvarCurso();
+            if (crud == 0) {
+                salvarCurso();
+            }else{
+                //atualizarCurso();
+            }
         });
     }
 
@@ -87,5 +111,18 @@ public class CursoActivity extends AppCompatActivity {
                         .show();
             }
         }
+    }
+
+    public void atualizarCurso() {
+        Intent intent = getIntent();
+
+        int id = intent.getIntExtra("id", 0);
+        String desc = intent.getStringExtra("desc");
+        String prof = intent.getStringExtra("prof");
+
+        binding.txtDescCurso.setText(desc);
+        binding.txtProfCurso.setText(prof);
+
+
     }
 }
