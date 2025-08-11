@@ -13,4 +13,8 @@
     <string name="professor">Professor</string>
     <string name="cadastro_de_curso">Cadastro de Curso</string>
     <string name="cancelar">Cancelar</string>
+    <string name="salvar">Salvar</string>
+    <string name="voltar">Voltar</string>
+    <string name="atualizar">Atualizar</string>
+
 </resources>

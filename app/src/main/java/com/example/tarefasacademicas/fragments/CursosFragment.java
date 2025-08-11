@@ -90,7 +90,7 @@ public class CursosFragment extends Fragment {
 
     public void novoCurso() {
         Intent intent = new Intent(getActivity(), CursoActivity.class);
-        intent.putExtra("crud", 0);
+        intent.putExtra("tela", "Cadastrar");
         startActivity(intent);
     }
 

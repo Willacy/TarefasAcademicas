@@ -76,4 +76,16 @@ public class Curso {
         cursoDao = new CursoDao(context);
         return cursoDao.listar();
     }
+
+    // Atualizar curso no banco de dados
+    public int atualizar(Context context) {
+        cursoDao = new CursoDao(context);
+        return cursoDao.atualizar(this);
+    }
+
+    // Deletar curso do banco de dados
+    public int deletar(Context context) {
+        cursoDao = new CursoDao(context);
+        return cursoDao.deletar(this.id_curso);
+    }
 }

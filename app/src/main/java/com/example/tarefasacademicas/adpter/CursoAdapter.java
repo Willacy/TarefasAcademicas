@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.tarefasacademicas.R;
 import com.example.tarefasacademicas.model.Curso;
@@ -45,11 +46,33 @@ public class CursoAdapter extends ArrayAdapter<Curso> {
 
         btnEditar.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), CursoActivity.class);
-            intent.putExtra("crud", 1);
-            intent.putExtra("id", curso.getId_curso());
-            intent.putExtra("desc", curso.getDesc_curso());
-            intent.putExtra("prof", curso.getProf_curso());
+            intent.putExtra("tela", "editar");
+            intent.putExtra("id_curso", curso.getId_curso());
+            intent.putExtra("desc_curso", curso.getDesc_curso());
+            intent.putExtra("prof_curso", curso.getProf_curso());
             getContext().startActivity(intent);
+        });
+
+        btnDeletar.setOnClickListener(v -> {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Atenção")
+                    .setMessage("Deseja deletar o curso?")
+                    .setNegativeButton("Não", null)
+                    .setPositiveButton("Sim", (dialog, which) -> {
+                        if (curso.deletar(getContext()) == 1) {
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle("Atenção")
+                                    .setMessage("Curso deletado com sucesso")
+                                    .setPositiveButton("OK", null)
+                                    .show();
+                        }else {
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle("Atenção")
+                                    .setMessage("Erro ao deletar curso")
+                                    .setPositiveButton("OK", null)
+                                    .show();
+                        }
+                    });
 
         });
 

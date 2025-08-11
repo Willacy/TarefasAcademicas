@@ -21,17 +21,6 @@ public class CursoActivity extends AppCompatActivity {
 
     private ActivityCursoBinding binding;
 
-    private int crud;
-
-    private Intent intent = getIntent();
-
-    public int getCrud() {
-        return this.crud;
-    }
-    public void setCrud(int crud) {
-        this.crud = crud;
-    }
-
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
@@ -43,10 +32,20 @@ public class CursoActivity extends AppCompatActivity {
         binding = ActivityCursoBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
-        this.setCrud(intent.getIntExtra("crud", 0));
-        if (this.getCrud() == 1) {
+
+        if (getIntent().getStringExtra("tela").equals("Cadastrar")) {
+            binding.lblTitulo.setText("Cadastro de Curso");
+            binding.btnSalvarCurso.setText("Salvar");
+            binding.btnCancelar.setText("Cancelar");
+            binding.txtDescCurso.setText("");
+            binding.txtProfCurso.setText("");
+        } else {
+            binding.lblTitulo.setText("Atualizar Curso");
             binding.btnSalvarCurso.setText("Atualizar");
+            binding.txtDescCurso.setText(getIntent().getStringExtra("desc_curso"));
+            binding.txtProfCurso.setText(getIntent().getStringExtra("prof_curso"));
         }
+
         binding.btnVoltar.setOnClickListener(v -> {
             finish();
         });
@@ -63,11 +62,13 @@ public class CursoActivity extends AppCompatActivity {
         });
 
         binding.btnSalvarCurso.setOnClickListener(v -> {
-            if (crud == 0) {
+            if(getIntent().getStringExtra("tela").equals("Cadastrar")){
                 salvarCurso();
             }else{
-                //atualizarCurso();
+                atualizarCurso(getIntent().getIntExtra("id_curso",-1));
             }
+
+
         });
     }
 
@@ -113,16 +114,25 @@ public class CursoActivity extends AppCompatActivity {
         }
     }
 
-    public void atualizarCurso() {
-        Intent intent = getIntent();
+    public void atualizarCurso(int id_curso) {
+        Curso curso = new Curso();
+        curso.setId_curso(id_curso);
+        curso.setDesc_curso(binding.txtDescCurso.getText().toString().toUpperCase());
+        curso.setProf_curso(binding.txtProfCurso.getText().toString().toUpperCase());
 
-        int id = intent.getIntExtra("id", 0);
-        String desc = intent.getStringExtra("desc");
-        String prof = intent.getStringExtra("prof");
-
-        binding.txtDescCurso.setText(desc);
-        binding.txtProfCurso.setText(prof);
-
-
+        if(curso.atualizar(this) == 1){
+            new AlertDialog.Builder(this)
+                    .setTitle("Atenção")
+                    .setMessage("Curso atualizado com sucesso")
+                    .setPositiveButton("OK", null)
+                    .show();
+        }else{
+            new AlertDialog.Builder(this)
+                    .setTitle("Atenção")
+                    .setMessage("Erro ao atualizar curso")
+                    .setPositiveButton("OK", null)
+                    .show();
+        }
     }
+
 }
