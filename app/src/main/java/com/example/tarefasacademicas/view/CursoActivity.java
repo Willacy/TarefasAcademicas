@@ -124,8 +124,11 @@ public class CursoActivity extends AppCompatActivity {
             new AlertDialog.Builder(this)
                     .setTitle("Atenção")
                     .setMessage("Curso atualizado com sucesso")
-                    .setPositiveButton("OK", null)
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        finish();
+                    })
                     .show();
+
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Atenção")

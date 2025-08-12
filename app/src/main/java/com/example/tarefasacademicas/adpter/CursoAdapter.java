@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -55,25 +56,18 @@ public class CursoAdapter extends ArrayAdapter<Curso> {
 
         btnDeletar.setOnClickListener(v -> {
             new AlertDialog.Builder(getContext())
-                    .setTitle("Atenção")
+                    .setTitle("Cuidado!")
                     .setMessage("Deseja deletar o curso?")
                     .setNegativeButton("Não", null)
                     .setPositiveButton("Sim", (dialog, which) -> {
                         if (curso.deletar(getContext()) == 1) {
-                            new AlertDialog.Builder(getContext())
-                                    .setTitle("Atenção")
-                                    .setMessage("Curso deletado com sucesso")
-                                    .setPositiveButton("OK", null)
-                                    .show();
-                        }else {
-                            new AlertDialog.Builder(getContext())
-                                    .setTitle("Atenção")
-                                    .setMessage("Erro ao deletar curso")
-                                    .setPositiveButton("OK", null)
-                                    .show();
+                            Toast.makeText(getContext(), "Curso deletado com sucesso", Toast.LENGTH_SHORT).show();
+                            remove(curso);
+                        }else{
+                            Toast.makeText(getContext(), "Erro ao deletar curso", Toast.LENGTH_SHORT).show();
                         }
-                    });
-
+                    })
+                    .show();
         });
 
         return convertView;
