@@ -16,5 +16,8 @@
     <string name="salvar">Salvar</string>
     <string name="voltar">Voltar</string>
     <string name="atualizar">Atualizar</string>
+    <string name="cadastro_de_tarefa">Cadastro de Tarefa</string>
+    <string name="tarefa">Tarefa</string>
+    <string name="data">Data</string>
 
 </resources>

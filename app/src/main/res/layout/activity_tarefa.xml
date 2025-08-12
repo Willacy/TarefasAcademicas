@@ -1,16 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.TarefaActivity"
-    android:orientation="vertical">
+    android:background="@color/cor_fundo"
+    tools:context=".view.TarefaActivity">
 
-    <EditText
-        android:layout_width="120dp"
+    <ImageButton
+        android:id="@+id/btnVoltar"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/txtIdTarefa"/>
+        android:background="@drawable/ic_voltar"
+        android:backgroundTint="@color/cor_menu"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout" />
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:background="@color/cor_fundo"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.432">
+
+        <TextView
+            android:id="@+id/lblTitulo"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/cadastro_de_tarefa"
+            android:textAlignment="center"
+            android:textColor="@color/cor_menu"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/txtDescTarefa"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:hint="@string/tarefa"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/cor_menu"
+            android:textColorHint="@color/cor_menu" />
+
+        <EditText
+            android:id="@+id/txtDataTarefa"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:hint="@string/data"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/cor_menu"
+            android:textColorHint="@color/cor_menu" />
+
+        <Spinner
+            android:id="@+id/spnTarefa"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/cor_menu"
+            android:textColorHint="@color/cor_menu" />
+
+        <Button
+            android:id="@+id/btnSalvarTarefa"
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/cor_menu"
+            android:text="@string/salvar"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/cor_menu"
+            android:text="@string/cancelar"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

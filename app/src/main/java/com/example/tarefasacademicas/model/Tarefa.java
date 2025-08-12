@@ -1,5 +1,13 @@
 package com.example.tarefasacademicas.model;
 
+import android.content.Context;
+
+import com.example.tarefasacademicas.dao.CursoDao;
+import com.example.tarefasacademicas.dao.TarefaDao;
+import com.example.tarefasacademicas.view.TarefaActivity;
+
+import java.util.List;
+
 public class Tarefa {
 
     // Atributos da classe
@@ -47,5 +55,40 @@ public class Tarefa {
     }
     public void setCurso_tarefa(int curso_tarefa) {
         this.curso_tarefa = curso_tarefa;
+    }
+
+    // Inserir tarefa ao banco de dados
+    public long inserir(Context context) {
+        TarefaDao tarefaDao = new TarefaDao(context);
+        long insert = tarefaDao.inserir(this);
+        // Verifica se tarefa foi inserida com sucesso
+        if (insert == -1) {
+            return 0;
+            // Caso contrário, retorna 1
+        } else {
+            return 1;
+        }
+    }
+
+    // Listar tarefas do banco de dados
+    public List<Tarefa> listar(Context context) {
+        TarefaDao tarefaDao = new TarefaDao(context);
+        return tarefaDao.listar();
+    }
+
+    // Atualizar tarefa no banco de dados
+    public int atualizar(Context context) {
+        TarefaDao tarefaDao = new TarefaDao(context);
+        return tarefaDao.atualizar(this);
+    }
+
+    // Deletar tarefa do banco de dados
+    public int deletar(Context context) {
+        TarefaDao tarefaDao = new TarefaDao(context);
+        return tarefaDao.deletar(this.id_tarefa);
+    }
+
+    public void setContext(TarefaActivity tarefaActivity) {
+
     }
 }

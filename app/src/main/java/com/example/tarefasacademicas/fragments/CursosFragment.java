@@ -41,7 +41,7 @@ public class CursosFragment extends Fragment {
     private String mParam2;
 
     public CursosFragment() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -96,18 +96,8 @@ public class CursosFragment extends Fragment {
 
     public void listarCursos(){
         List<Curso> lista = curso.listar(requireContext());
-
-        /*List<String> listaCursos = new ArrayList<>();
-        while(!lista.isEmpty()){
-            listaCursos.add(lista.get(0).getDesc_curso());
-            listaCursos.add(lista.get(0).getProf_curso());
-            lista.remove(0);
-        }*/
-
         CursoAdapter adapter = new CursoAdapter(requireContext(), lista);
-
         binding.lstCursos.setAdapter(adapter);
-
     }
 
     @Override
