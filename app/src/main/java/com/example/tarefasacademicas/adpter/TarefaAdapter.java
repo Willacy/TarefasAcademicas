@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.tarefasacademicas.R;
+import com.example.tarefasacademicas.dao.CursoDao;
+import com.example.tarefasacademicas.model.Curso;
 import com.example.tarefasacademicas.model.Tarefa;
 import com.example.tarefasacademicas.view.TarefaActivity;
 
@@ -38,6 +40,9 @@ public class TarefaAdapter extends ArrayAdapter<Tarefa> {
         TextView txtItem3 = convertView.findViewById(R.id.txtItem3);
         ImageButton btnEditar = convertView.findViewById(R.id.btnEditar);
         ImageButton btnDeletar = convertView.findViewById(R.id.btnDeletar);
+
+
+        // Preencher os campos do item da lista com os dados da tarefa
 
         txtItem1.setText(tarefa.getDesc_tarefa());
         txtItem2.setText("Curso: " + tarefa.getCurso_tarefa());

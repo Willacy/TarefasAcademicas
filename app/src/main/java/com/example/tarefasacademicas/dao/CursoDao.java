@@ -26,16 +26,10 @@ public class CursoDao {
 
     // Inserindo um novo curso (CREATE)
     public long inserir(Curso curso) {
-        try{
             ContentValues valores = new ContentValues();
             valores.put("desc_curso", curso.getDesc_curso());
             valores.put("prof_curso", curso.getProf_curso());
             return db.insert("curso", null, valores);
-        }catch (Exception e){
-            Toast.makeText(curso.getContext(), "Erro ao inserir curso", Toast.LENGTH_SHORT).show();
-            return -1;
-        }
-
     }
 
     // Buscando todos os cursos (READ)
@@ -59,7 +53,8 @@ public class CursoDao {
 
     // Buscando um curso pelo id (READ)
     public Curso buscar(int id) {
-        Cursor cursor = db.rawQuery("SELECT * FROM curso WHERE id_curso = ?", new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery("SELECT * FROM curso  WHERE id_curso = ?", new String[]{String.valueOf(id)});
+        System.out.println(cursor);
         if (cursor.moveToFirst()) {
             Curso curso = new Curso();
             curso.setId_curso(cursor.getInt(0));
@@ -68,6 +63,7 @@ public class CursoDao {
             cursor.close();
             return curso;
         }
+
         cursor.close();
         return null;
     }

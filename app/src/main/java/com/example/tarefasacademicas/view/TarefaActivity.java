@@ -2,6 +2,7 @@ package com.example.tarefasacademicas.view;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +16,12 @@ import com.example.tarefasacademicas.databinding.ActivityTarefaBinding;
 import com.example.tarefasacademicas.model.Curso;
 import com.example.tarefasacademicas.model.Tarefa;
 
+import java.util.List;
+
 public class TarefaActivity extends AppCompatActivity {
 
     private ActivityTarefaBinding binding;
+    private Curso curso = new Curso();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,16 @@ public class TarefaActivity extends AppCompatActivity {
         binding = ActivityTarefaBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
+
+        // Alimentar o spinner
+        List<Curso> listaCursos = curso.listar(this);
+        ArrayAdapter<Curso> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                listaCursos
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spnTarefa.setAdapter(adapter);
 
         if (getIntent().getStringExtra("tela").equals("Cadastrar")) {
             binding.lblTitulo.setText("Cadstro de tarefa");

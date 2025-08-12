@@ -76,6 +76,11 @@ public class Curso {
         cursoDao = new CursoDao(context);
         return cursoDao.listar();
     }
+    // Listar cursos do banco de dados por id
+    public Curso buscar(Context context, int id_curso) {
+        cursoDao = new CursoDao(context);
+        return cursoDao.buscar(id_curso);
+    }
 
     // Atualizar curso no banco de dados
     public int atualizar(Context context) {
@@ -87,5 +92,10 @@ public class Curso {
     public int deletar(Context context) {
         cursoDao = new CursoDao(context);
         return cursoDao.deletar(this.id_curso);
+    }
+
+    @Override
+    public String toString(){
+        return desc_curso;
     }
 }
