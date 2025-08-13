@@ -10,8 +10,8 @@
         android:icon="@drawable/ic_books"
         android:title="@string/cursos" />
 
-    <item
-        android:id="@+id/menu_agenda"
-        android:icon="@drawable/ic_cal"
-        android:title="@string/agenda" />
+<!--    <item-->
+<!--        android:id="@+id/menu_agenda"-->
+<!--        android:icon="@drawable/ic_cal"-->
+<!--        android:title="@string/agenda" />-->
 </menu>

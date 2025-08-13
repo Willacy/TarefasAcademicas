@@ -47,7 +47,7 @@ public class TarefaActivity extends AppCompatActivity {
             binding.txtDataTarefa.setText("");
             binding.spnTarefa.setSelection(0);
         } else {
-            binding.lblTitulo.setText("Atualizar Curso");
+            binding.lblTitulo.setText("Atualizar Tarefa");
             binding.btnSalvarTarefa.setText("Atualizar");
             binding.txtDescTarefa.setText(getIntent().getStringExtra("desc_tarefa"));
             binding.txtDataTarefa.setText(getIntent().getStringExtra("data_tarefa"));

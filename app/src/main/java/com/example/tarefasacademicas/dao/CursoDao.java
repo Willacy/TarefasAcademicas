@@ -53,7 +53,7 @@ public class CursoDao {
 
     // Buscando um curso pelo id (READ)
     public Curso buscar(int id) {
-        Cursor cursor = db.rawQuery("SELECT * FROM curso  WHERE id_curso = ?", new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery("SELECT * FROM curso WHERE id_curso = ?", new String[]{String.valueOf(id)});
         System.out.println(cursor);
         if (cursor.moveToFirst()) {
             Curso curso = new Curso();
