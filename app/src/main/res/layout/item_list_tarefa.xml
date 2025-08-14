@@ -2,72 +2,90 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp"
-    android:layout_marginBottom="3dp">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:orientation="vertical"
-        android:layout_gravity="start">
-
-        <TextView
-            android:id="@+id/txtItem1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="item1"
-            android:textColor="@color/cor_menu"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtItem2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="item2"
-            android:textColor="@color/cor_menu"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/txtItem3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="item2"
-            android:textColor="@color/cor_menu"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_margin="2dp"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/bg_gradiente_item_list"
+        android:elevation="10dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_gravity="center">
+        android:padding="10dp">
 
-        <ImageButton
-            android:id="@+id/btnEditar"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:background="@drawable/ic_edit"
-            android:backgroundTint="@color/cor_menu"
-            android:contentDescription="@string/todo"
-            android:paddingHorizontal="12dp"
-            android:layout_marginRight="8dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/btnDeletar"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/ic_delete"
-            android:backgroundTint="@color/cor_menu"
-            android:contentDescription="@string/todo"
-            android:paddingHorizontal="12dp" />
+            <TextView
+                android:id="@+id/txtItem1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_textview_arredondado"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="item1"
+                android:textColor="@color/cor_menu"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtItem2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="item2"
+                android:textColor="@color/cor_menu"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtItem3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="item2"
+                android:textColor="@color/cor_menu"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnEditar"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/ic_edit"
+                    android:backgroundTint="@color/cor_menu"
+                    android:contentDescription="@string/todo"
+                    android:paddingHorizontal="12dp" />
+
+                <ImageButton
+                    android:id="@+id/btnDeletar"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/ic_delete"
+                    android:backgroundTint="@color/cor_menu"
+                    android:contentDescription="@string/todo"
+                    android:paddingHorizontal="12dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
 
     </LinearLayout>
-
 </LinearLayout>

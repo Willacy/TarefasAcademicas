@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cor_fundo"
+    android:background="@drawable/bg_gradiente"
     tools:context=".view.TarefaActivity">
 
     <ImageButton
@@ -13,7 +13,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/ic_voltar"
-        android:backgroundTint="@color/cor_menu"
+        android:backgroundTint="@color/white"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout" />
@@ -22,7 +22,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="400dp"
         android:layout_height="400dp"
-        android:background="@color/cor_fundo"
+
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,14 +41,15 @@
             android:textAlignment="center"
             android:textColor="@color/cor_menu"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@drawable/bg_textview_arredondado"/>
 
         <EditText
             android:id="@+id/txtDescTarefa"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/white"
+            android:background="@drawable/bg_textview_arredondado"
             android:hint="@string/tarefa"
             android:paddingHorizontal="10dp"
             android:textColor="@color/cor_menu"
@@ -59,7 +60,7 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/white"
+            android:background="@drawable/bg_textview_arredondado"
             android:hint="@string/data"
             android:paddingHorizontal="10dp"
             android:textColor="@color/cor_menu"
@@ -70,7 +71,7 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/white"
+            android:background="@drawable/bg_textview_arredondado"
             android:paddingHorizontal="10dp"
             android:textColor="@color/cor_menu"
             android:textColorHint="@color/cor_menu" />

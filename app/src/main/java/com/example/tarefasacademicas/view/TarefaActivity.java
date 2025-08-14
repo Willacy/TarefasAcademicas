@@ -1,7 +1,9 @@
 package com.example.tarefasacademicas.view;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.InputType;
 import android.widget.ArrayAdapter;
 
 import androidx.activity.EdgeToEdge;
@@ -16,6 +18,7 @@ import com.example.tarefasacademicas.databinding.ActivityTarefaBinding;
 import com.example.tarefasacademicas.model.Curso;
 import com.example.tarefasacademicas.model.Tarefa;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class TarefaActivity extends AppCompatActivity {
@@ -39,6 +42,22 @@ public class TarefaActivity extends AppCompatActivity {
         );
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_tarefa);
         binding.spnTarefa.setAdapter(adapter);
+
+        // Essa linha configura a captura da data
+        binding.txtDataTarefa.setInputType(InputType.TYPE_NULL);
+        binding.txtDataTarefa.setFocusable(false);
+        binding.txtDataTarefa.setOnClickListener(v -> {
+            final Calendar calendario = Calendar.getInstance();
+            int ano = calendario.get(Calendar.YEAR);
+            int mes = calendario.get(Calendar.MONTH);
+            int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+            new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+                String data = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year);
+                binding.txtDataTarefa.setText(data);
+            }, ano, mes, dia).show();
+        });
+        // fim da captura da data
 
         if (getIntent().getStringExtra("tela").equals("Cadastrar")) {
             binding.lblTitulo.setText("Cadastro de tarefa");

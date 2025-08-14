@@ -5,15 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cor_fundo"
-    tools:context=".view.CursoActivity">
+    android:background="@drawable/bg_gradiente"
+    tools:context=".view.CursoActivity"
+    >
 
     <ImageButton
         android:id="@+id/btnVoltar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/ic_voltar"
-        android:backgroundTint="@color/cor_menu"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout" />
 
@@ -21,7 +22,6 @@
         android:id="@+id/linearLayout"
         android:layout_width="400dp"
         android:layout_height="400dp"
-        android:background="@color/cor_fundo"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:text="@string/cadastro_de_curso"
+            android:background="@drawable/bg_textview_arredondado"
             android:textAlignment="center"
             android:textColor="@color/cor_menu"
             android:textSize="30sp"
@@ -47,7 +48,7 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/white"
+            android:background="@drawable/bg_textview_arredondado"
             android:hint="@string/curso"
             android:paddingHorizontal="10dp"
             android:textColor="@color/cor_menu"
@@ -58,7 +59,7 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/white"
+            android:background="@drawable/bg_textview_arredondado"
             android:hint="@string/professor"
             android:paddingHorizontal="10dp"
             android:textColor="@color/cor_menu"
