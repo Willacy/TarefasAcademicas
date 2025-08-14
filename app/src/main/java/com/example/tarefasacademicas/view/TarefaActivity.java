@@ -34,10 +34,10 @@ public class TarefaActivity extends AppCompatActivity {
         List<Curso> listaCursos = curso.listar(this);
         ArrayAdapter<Curso> adapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_spinner_item,
+                R.layout.spinner_tarefa,
                 listaCursos
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_tarefa);
         binding.spnTarefa.setAdapter(adapter);
 
         if (getIntent().getStringExtra("tela").equals("Cadastrar")) {
@@ -124,6 +124,7 @@ public class TarefaActivity extends AppCompatActivity {
             }
         }
     }
+    // Método para atualizar a tarefa
     public void atualizarTarefa(int id_tarefa) {
         Tarefa tarefa = new Tarefa();
         tarefa.setId_tarefa(id_tarefa);
