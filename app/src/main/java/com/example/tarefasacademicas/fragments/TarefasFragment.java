@@ -3,6 +3,7 @@ package com.example.tarefasacademicas.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -84,7 +85,23 @@ public class TarefasFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.btnNovaTarefa.setOnClickListener(v -> {
-            novaTarefa();
+            List<Curso> cursos = new Curso().listar(getContext());
+            if (cursos.isEmpty()) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Atenção")
+                        .setMessage("Para cadastrar uma tarefa, é necessario ter pelo menos um " +
+                                "curso cadastrado.\nDeseja cadastrar um curso?")
+                        .setPositiveButton("sim", (dialog, which) -> {
+                            Intent intent = new Intent(getContext(), CursoActivity.class);
+                            intent.putExtra("tela", "Cadastrar");
+                            startActivity(intent);
+                        })
+                        .setNegativeButton("não", null)
+                        .show();
+            }else{
+                novaTarefa();
+            }
+
         });
     }
 

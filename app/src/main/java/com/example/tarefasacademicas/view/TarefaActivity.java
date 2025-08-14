@@ -41,7 +41,7 @@ public class TarefaActivity extends AppCompatActivity {
         binding.spnTarefa.setAdapter(adapter);
 
         if (getIntent().getStringExtra("tela").equals("Cadastrar")) {
-            binding.lblTitulo.setText("Cadstro de tarefa");
+            binding.lblTitulo.setText("Cadastro de tarefa");
             binding.btnSalvarTarefa.setText("Salvar");
             binding.txtDescTarefa.setText("");
             binding.txtDataTarefa.setText("");
