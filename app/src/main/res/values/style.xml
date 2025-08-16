@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="HintTextStyle" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textColor">@color/cor_menu</item>
+    </style>
+</resources>

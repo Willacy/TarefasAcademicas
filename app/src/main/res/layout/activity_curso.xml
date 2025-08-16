@@ -1,88 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradiente"
-    tools:context=".view.CursoActivity"
-    >
+    android:background="@color/colorBackground"
+    tools:context=".view.CursoActivity">
 
-    <ImageButton
+    <!-- Botão Voltar -->
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/btnVoltar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/ic_voltar"
-        android:backgroundTint="@color/white"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_voltar"
+        android:contentDescription="@string/todo"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout" />
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.None"
+        app:tint="@color/colorPrimary" />
 
+    <!-- Container principal -->
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.432">
+        app:layout_constraintVertical_bias="0.358">
 
+        <!-- Título -->
         <TextView
             android:id="@+id/lblTitulo"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
             android:text="@string/cadastro_de_curso"
-            android:background="@drawable/bg_textview_arredondado"
-            android:textAlignment="center"
-            android:textColor="@color/cor_menu"
-            android:textSize="30sp"
+            android:textColor="@color/colorPrimaryVariant"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/txtDescCurso"
-            android:layout_width="350dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/bg_textview_arredondado"
+        <!-- Campo Curso -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutDescCurso"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:hint="@string/curso"
-            android:paddingHorizontal="10dp"
-            android:textColor="@color/cor_menu"
-            android:textColorHint="@color/cor_menu" />
+            android:textColorHint="@color/colorPrimary"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeWidth="2dp"
+            app:hintTextAppearance="@style/HintTextStyle"
+            app:hintTextColor="@color/colorPrimary">
 
-        <EditText
-            android:id="@+id/txtProfCurso"
-            android:layout_width="350dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/bg_textview_arredondado"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtDescCurso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/cor_menu" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo Professor -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutProfCurso"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:hint="@string/professor"
-            android:paddingHorizontal="10dp"
-            android:textColor="@color/cor_menu"
-            android:textColorHint="@color/cor_menu" />
+            android:textColorHint="@color/colorPrimary"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeWidth="2dp"
+            app:hintTextAppearance="@style/HintTextStyle"
+            app:hintTextColor="@color/colorPrimary">
 
-        <Button
-            android:id="@+id/btnSalvarCurso"
-            android:layout_width="170dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/cor_menu"
-            android:text="@string/salvar"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtProfCurso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/cor_menu" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="170dp"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/cor_menu"
-            android:text="@string/cancelar"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+        <!-- Botões -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSalvarCurso"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="@string/salvar"
+                android:textColor="@color/colorOnPrimary"
+                android:textSize="16sp"
+                app:backgroundTint="@color/colorPrimary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelar"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cancelar"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                app:strokeColor="@color/colorPrimary" />
+        </LinearLayout>
 
     </LinearLayout>
 
