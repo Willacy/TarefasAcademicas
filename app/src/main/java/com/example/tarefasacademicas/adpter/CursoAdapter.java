@@ -1,16 +1,11 @@
 package com.example.tarefasacademicas.adpter;
 
-import static android.app.PendingIntent.getActivity;
-
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.example.tarefasacademicas.R;
 import com.example.tarefasacademicas.model.Curso;
 import com.example.tarefasacademicas.view.CursoActivity;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
 
@@ -37,10 +33,11 @@ public class CursoAdapter extends ArrayAdapter<Curso> {
             convertView = LayoutInflater.from(getContext())
                     .inflate(R.layout.item_list_curso, parent, false);
         }
+
         TextView txtItem1 = convertView.findViewById(R.id.txtItem1);
         TextView txtItem2 = convertView.findViewById(R.id.txtItem2);
-        ImageButton btnEditar = convertView.findViewById(R.id.btnEditar);
-        ImageButton btnDeletar = convertView.findViewById(R.id.btnDeletar);
+        ShapeableImageView btnEditar = convertView.findViewById(R.id.btnEditar);
+        ShapeableImageView btnDeletar = convertView.findViewById(R.id.btnDeletar);
 
         txtItem1.setText(curso.getDesc_curso());
         txtItem2.setText("Prof.: " + curso.getProf_curso());
@@ -60,7 +57,7 @@ public class CursoAdapter extends ArrayAdapter<Curso> {
                         .setTitle("Informação!")
                         .setMessage("Não é possível deletar este curso, " +
                                 "pois existe(m) tarefa(s) ligada(s) a ele.")
-                        .setNegativeButton("ok", null)
+                        .setNegativeButton("Ok", null)
                         .show();
                 return;
             }

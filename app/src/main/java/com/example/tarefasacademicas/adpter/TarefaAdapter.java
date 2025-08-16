@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,10 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.tarefasacademicas.R;
-import com.example.tarefasacademicas.dao.CursoDao;
 import com.example.tarefasacademicas.model.Curso;
 import com.example.tarefasacademicas.model.Tarefa;
 import com.example.tarefasacademicas.view.TarefaActivity;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
 
@@ -31,19 +30,19 @@ public class TarefaAdapter extends ArrayAdapter<Tarefa> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Tarefa tarefa = getItem(position);
+
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext())
                     .inflate(R.layout.item_list_tarefa, parent, false);
         }
+
         TextView txtItem1 = convertView.findViewById(R.id.txtItem1);
         TextView txtItem2 = convertView.findViewById(R.id.txtItem2);
         TextView txtItem3 = convertView.findViewById(R.id.txtItem3);
-        ImageButton btnEditar = convertView.findViewById(R.id.btnEditar);
-        ImageButton btnDeletar = convertView.findViewById(R.id.btnDeletar);
-
+        ShapeableImageView btnEditar = convertView.findViewById(R.id.btnEditar);
+        ShapeableImageView btnDeletar = convertView.findViewById(R.id.btnDeletar);
 
         // Preencher os campos do item da lista com os dados da tarefa
-
         txtItem1.setText(tarefa.getDesc_tarefa());
         Curso curso = new Curso().buscar(getContext(), tarefa.getCurso_tarefa());
         txtItem2.setText("Curso: " + curso.getDesc_curso());
@@ -74,6 +73,7 @@ public class TarefaAdapter extends ArrayAdapter<Tarefa> {
                     })
                     .show();
         });
+
         return convertView;
     }
 }
