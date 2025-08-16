@@ -1,38 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradiente"
+    android:background="@color/colorBackground"
     tools:context=".fragments.CursosFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Lista de cursos -->
         <ListView
             android:id="@+id/lstCursos"
-            android:layout_width="match_parent"
-            android:layout_height="600dp"
+            android:layout_width="0dp"
+            android:layout_height="550dp"
+            android:divider="@color/colorPrimary"
+            android:dividerHeight="1dp"
+            android:padding="8dp"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btnNovoCurso"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/ic_new_book"
-            android:backgroundTint="@color/white"
-            android:contentDescription="@string/todo"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Botão adicionar curso -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnNovoCurso"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_new_book"
+            app:backgroundTint="@color/colorPrimary"
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
