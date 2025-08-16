@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,16 +7,19 @@
     <fragment
         android:id="@+id/menu_tarefas"
         android:name="com.example.tarefasacademicas.fragments.TarefasFragment"
-        android:label="fragment_tarefas"
+        android:label="Tarefas"
         tools:layout="@layout/fragment_tarefas" />
+
     <fragment
         android:id="@+id/menu_cursos"
         android:name="com.example.tarefasacademicas.fragments.CursosFragment"
-        android:label="fragment_cursos"
+        android:label="Cursos"
         tools:layout="@layout/fragment_cursos" />
+
     <fragment
         android:id="@+id/menu_agenda"
         android:name="com.example.tarefasacademicas.fragments.AgendaFragment"
-        android:label="fragment_agenda"
+        android:label="Agenda"
         tools:layout="@layout/fragment_agenda" />
+
 </navigation>

@@ -4,196 +4,182 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.widget.ArrayAdapter;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.example.tarefasacademicas.R;
-import com.example.tarefasacademicas.databinding.ActivityCursoBinding;
 import com.example.tarefasacademicas.databinding.ActivityTarefaBinding;
 import com.example.tarefasacademicas.model.Curso;
 import com.example.tarefasacademicas.model.Tarefa;
-
 import java.util.Calendar;
 import java.util.List;
 
 public class TarefaActivity extends AppCompatActivity {
 
     private ActivityTarefaBinding binding;
-    private Curso curso = new Curso();
+    private Curso cursoModel = new Curso();
+    private ArrayAdapter<Curso> spinnerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityTarefaBinding.inflate(getLayoutInflater());
-        EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
 
-        // Alimentar o spinner
-        binding.spnTarefa.setAdapter(alimentarSpinner());
+        // Alimentar o spinner apenas uma vez
+        spinnerAdapter = criarAdapterSpinner();
+        binding.spnTarefa.setAdapter(spinnerAdapter);
 
-        // Essa linha configura a captura da data
+        configurarCapturaData();
+        configurarTela();
+        configurarBotoes();
+    }
+
+    private ArrayAdapter<Curso> criarAdapterSpinner() {
+        List<Curso> listaCursos = cursoModel.listar(this);
+        listaCursos.add(0, new Curso(0, "Selecione um curso", ""));
+        ArrayAdapter<Curso> adapter = new ArrayAdapter<>(this, R.layout.spinner_tarefa, listaCursos);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_tarefa);
+        return adapter;
+    }
+
+    private void configurarCapturaData() {
         binding.txtDataTarefa.setInputType(InputType.TYPE_NULL);
         binding.txtDataTarefa.setFocusable(false);
         binding.txtDataTarefa.setOnClickListener(v -> {
-            final Calendar calendario = Calendar.getInstance();
-            int ano = calendario.get(Calendar.YEAR);
-            int mes = calendario.get(Calendar.MONTH);
-            int dia = calendario.get(Calendar.DAY_OF_MONTH);
-
-            new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
-                String data = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year);
+            final Calendar c = Calendar.getInstance();
+            new DatePickerDialog(this, (view, year, month, day) -> {
+                String data = String.format("%02d/%02d/%04d", day, month + 1, year);
                 binding.txtDataTarefa.setText(data);
-            }, ano, mes, dia).show();
+            }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
         });
-        // fim da captura da data
+    }
 
-        if (getIntent().getStringExtra("tela").equals("Cadastrar")) {
-            binding.lblTitulo.setText("Cadastro de tarefa");
+    private void configurarTela() {
+        String acao = getIntent().getStringExtra("tela");
+        if ("Cadastrar".equalsIgnoreCase(acao)) {
+            binding.lblTitulo.setText("Cadastro de Tarefa");
             binding.btnSalvarTarefa.setText("Salvar");
-            binding.txtDescTarefa.setText("");
-            binding.txtDataTarefa.setText("");
         } else {
             binding.lblTitulo.setText("Atualizar Tarefa");
             binding.btnSalvarTarefa.setText("Atualizar");
             binding.txtDescTarefa.setText(getIntent().getStringExtra("desc_tarefa"));
             binding.txtDataTarefa.setText(getIntent().getStringExtra("data_tarefa"));
-            Curso curso = new Curso().buscar(this, getIntent().getIntExtra("curso_tarefa", 0));
-            for (int i = 0; i < alimentarSpinner().getCount(); i++) {
-                if (alimentarSpinner().getItem(i).getId_curso() == curso.getId_curso()) {
-                    binding.spnTarefa.setSelection(i);
-                    break;
-                }
+            Curso cursoSelecionado = new Curso().buscar(this, getIntent().getIntExtra("curso_tarefa", 0));
+            selecionarCursoNoSpinner(cursoSelecionado);
+        }
+    }
+
+    private void selecionarCursoNoSpinner(Curso cursoSelecionado) {
+        for (int i = 0; i < spinnerAdapter.getCount(); i++) {
+            if (spinnerAdapter.getItem(i).getId_curso() == cursoSelecionado.getId_curso()) {
+                binding.spnTarefa.setSelection(i);
+                break;
             }
         }
+    }
 
-        binding.btnVoltar.setOnClickListener(v -> {
-            finish();
-        });
+    private void configurarBotoes() {
+        binding.btnVoltar.setOnClickListener(v -> finish());
 
-        binding.btnCancelar.setOnClickListener(v -> {
-            new AlertDialog.Builder(this)
-                    .setTitle("Atenção")
-                    .setMessage("Deseja cancelar a operação?")
-                    .setNegativeButton("Não", null)
-                    .setPositiveButton("Sim", (dialog, which) -> {
-                        finish();
-                    })
-                    .show();
-        });
+        binding.btnCancelar.setOnClickListener(v ->
+                new AlertDialog.Builder(this)
+                        .setTitle("Atenção")
+                        .setMessage("Deseja cancelar a operação?")
+                        .setNegativeButton("Não", null)
+                        .setPositiveButton("Sim", (dialog, which) -> finish())
+                        .show());
 
         binding.btnSalvarTarefa.setOnClickListener(v -> {
-            if (getIntent().getStringExtra("tela").equals("Cadastrar")) {
+            String acao = getIntent().getStringExtra("tela");
+            if ("Cadastrar".equalsIgnoreCase(acao)) {
                 salvarTarefa();
             } else {
                 atualizarTarefa(getIntent().getIntExtra("id_tarefa", -1));
             }
-
-
         });
     }
 
-    // Método para alimentar o spinner
-    public ArrayAdapter<Curso> alimentarSpinner() {
-        List<Curso> listaCursos = curso.listar(this);
-        listaCursos.add(0, new Curso(0, "Selecione um curso", ""));
-        ArrayAdapter<Curso> adapter = new ArrayAdapter<>(
-                this,
-                R.layout.spinner_tarefa,
-                listaCursos
-        );
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_tarefa);
-        binding.spnTarefa.setSelection(-1, true);
-        return adapter;
-    }
-
-    // Método para salvar a tarefa
-    public void salvarTarefa() {
-        // Obtém os dados da tarefa a partir dos campos de texto
-        String descTarefa = binding.txtDescTarefa.getText().toString().toUpperCase();
-        String dataTarefa = binding.txtDataTarefa.getText().toString().toUpperCase();
-        Curso curso = (Curso) binding.spnTarefa.getSelectedItem();
-
-        // Verifica se os campos estão vazios
+    private boolean validarCampos(String descTarefa, String dataTarefa, Curso cursoSelecionado) {
         if (descTarefa.isEmpty() || dataTarefa.isEmpty()) {
             new AlertDialog.Builder(this)
                     .setTitle("Atenção")
                     .setMessage("Preencha todos os campos")
                     .setPositiveButton("OK", null)
                     .show();
-
-        } else if(curso.getId_curso() == 0){
+            return false;
+        } else if (cursoSelecionado.getId_curso() == 0) {
             new AlertDialog.Builder(this)
                     .setTitle("Atenção")
                     .setMessage("Selecione um curso!")
                     .setPositiveButton("OK", null)
                     .show();
-        }else {
-            // Cria um objeto Tarefa
-            Tarefa tarefa = new Tarefa();
-            tarefa.setDesc_tarefa(descTarefa);
-            tarefa.setData_tarefa(dataTarefa);
-            tarefa.setCurso_tarefa(curso.getId_curso());
-            tarefa.setContext(this);
+            return false;
+        }
+        return true;
+    }
 
-            long inserted = tarefa.inserir(this);
-            if (inserted == 1) {
-                new AlertDialog.Builder(this)
-                        .setTitle("Atenção")
-                        .setMessage("Tarefa inserida com sucesso")
-                        .setPositiveButton("OK", null)
-                        .show();
+    private void salvarTarefa() {
+        String desc = binding.txtDescTarefa.getText().toString().toUpperCase();
+        String data = binding.txtDataTarefa.getText().toString().toUpperCase();
+        Curso cursoSelecionado = (Curso) binding.spnTarefa.getSelectedItem();
 
-                binding.txtDescTarefa.setText("");
-                binding.txtDataTarefa.setText("");
-                binding.spnTarefa.setSelection(0);
+        if (!validarCampos(desc, data, cursoSelecionado)) return;
 
-            } else {
-                new AlertDialog.Builder(this)
-                        .setTitle("Atenção")
-                        .setMessage("Erro ao inserir tarefa")
-                        .setPositiveButton("OK", null)
-                        .show();
-            }
+        Tarefa tarefa = new Tarefa();
+        tarefa.setDesc_tarefa(desc);
+        tarefa.setData_tarefa(data);
+        tarefa.setCurso_tarefa(cursoSelecionado.getId_curso());
+        tarefa.setContext(this);
+
+        long resultado = tarefa.inserir(this);
+        if (resultado != -1) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Sucesso")
+                    .setMessage("Tarefa inserida com sucesso")
+                    .setPositiveButton("OK", null)
+                    .show();
+            limparCampos();
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle("Erro")
+                    .setMessage("Erro ao inserir tarefa")
+                    .setPositiveButton("OK", null)
+                    .show();
         }
     }
 
-    // Método para atualizar a tarefa
-    public void atualizarTarefa(int id_tarefa) {
+    private void atualizarTarefa(int idTarefa) {
+        String desc = binding.txtDescTarefa.getText().toString().toUpperCase();
+        String data = binding.txtDataTarefa.getText().toString().toUpperCase();
+        Curso cursoSelecionado = (Curso) binding.spnTarefa.getSelectedItem();
+
+        if (!validarCampos(desc, data, cursoSelecionado)) return;
+
         Tarefa tarefa = new Tarefa();
-        tarefa.setId_tarefa(id_tarefa);
-        tarefa.setDesc_tarefa(binding.txtDescTarefa.getText().toString().toUpperCase());
-        tarefa.setData_tarefa(binding.txtDataTarefa.getText().toString().toUpperCase());
-        Curso curso = (Curso) binding.spnTarefa.getSelectedItem();
-        tarefa.setCurso_tarefa(curso.getId_curso());
+        tarefa.setId_tarefa(idTarefa);
+        tarefa.setDesc_tarefa(desc);
+        tarefa.setData_tarefa(data);
+        tarefa.setCurso_tarefa(cursoSelecionado.getId_curso());
 
-
-        if(curso.getId_curso() == 0){
+        if (tarefa.atualizar(this) == 1) {
             new AlertDialog.Builder(this)
-                    .setTitle("Atenção")
-                    .setMessage("Selecione um curso!")
-                    .setPositiveButton("OK", null)
-                    .show();
-        }else if (tarefa.atualizar(this) == 1) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Atenção")
+                    .setTitle("Sucesso")
                     .setMessage("Tarefa atualizada com sucesso")
-                    .setPositiveButton("OK", (dialog, which) -> {
-                        finish();
-                    })
+                    .setPositiveButton("OK", (dialog, which) -> finish())
                     .show();
-
         } else {
             new AlertDialog.Builder(this)
-                    .setTitle("Atenção")
+                    .setTitle("Erro")
                     .setMessage("Erro ao atualizar tarefa")
                     .setPositiveButton("OK", null)
                     .show();
         }
+    }
+
+    private void limparCampos() {
+        binding.txtDescTarefa.setText("");
+        binding.txtDataTarefa.setText("");
+        binding.spnTarefa.setSelection(0);
+        binding.txtDescTarefa.requestFocus();
     }
 }

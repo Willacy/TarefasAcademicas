@@ -33,7 +33,7 @@
             android:layout_height="64dp"
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_add_task"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorPrimaryVariant"
             app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
