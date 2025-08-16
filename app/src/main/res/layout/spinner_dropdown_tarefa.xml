@@ -5,4 +5,5 @@
     android:padding="10dp"
     android:textColor="@color/cor_menu"
     android:background="@android:color/white"
-    android:textSize="18sp" />
+    android:textSize="18sp"
+    android:hint="@string/selecione_um_curso"/>

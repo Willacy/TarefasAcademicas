@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import androidx.activity.EdgeToEdge;
@@ -34,14 +35,8 @@ public class TarefaActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // Alimentar o spinner
-        List<Curso> listaCursos = curso.listar(this);
-        ArrayAdapter<Curso> adapter = new ArrayAdapter<>(
-                this,
-                R.layout.spinner_tarefa,
-                listaCursos
-        );
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_tarefa);
-        binding.spnTarefa.setAdapter(adapter);
+        binding.spnTarefa.setAdapter(alimentarSpinner());
+        binding.spnTarefa.setSelection(-1, true);
 
         // Essa linha configura a captura da data
         binding.txtDataTarefa.setInputType(InputType.TYPE_NULL);
@@ -64,13 +59,19 @@ public class TarefaActivity extends AppCompatActivity {
             binding.btnSalvarTarefa.setText("Salvar");
             binding.txtDescTarefa.setText("");
             binding.txtDataTarefa.setText("");
-            binding.spnTarefa.setSelection(0);
+            binding.spnTarefa.setSelection(-1, true);
         } else {
             binding.lblTitulo.setText("Atualizar Tarefa");
             binding.btnSalvarTarefa.setText("Atualizar");
             binding.txtDescTarefa.setText(getIntent().getStringExtra("desc_tarefa"));
             binding.txtDataTarefa.setText(getIntent().getStringExtra("data_tarefa"));
-            binding.spnTarefa.setSelection(getIntent().getIntExtra("curso_tarefa",-1));
+            Curso curso = new Curso().buscar(this, getIntent().getIntExtra("curso_tarefa", 0));
+            for (int i = 0; i < alimentarSpinner().getCount(); i++) {
+                if (alimentarSpinner().getItem(i).getId_curso() == curso.getId_curso()) {
+                    binding.spnTarefa.setSelection(i);
+                    break;
+                }
+            }
         }
 
         binding.btnVoltar.setOnClickListener(v -> {
@@ -89,14 +90,26 @@ public class TarefaActivity extends AppCompatActivity {
         });
 
         binding.btnSalvarTarefa.setOnClickListener(v -> {
-            if(getIntent().getStringExtra("tela").equals("Cadastrar")){
+            if (getIntent().getStringExtra("tela").equals("Cadastrar")) {
                 salvarTarefa();
-            }else{
-                atualizarTarefa(getIntent().getIntExtra("id_tarefa",-1));
+            } else {
+                atualizarTarefa(getIntent().getIntExtra("id_tarefa", -1));
             }
 
 
         });
+    }
+
+    // Método para alimentar o spinner
+    public ArrayAdapter<Curso> alimentarSpinner() {
+        List<Curso> listaCursos = curso.listar(this);
+        ArrayAdapter<Curso> adapter = new ArrayAdapter<>(
+                this,
+                R.layout.spinner_tarefa,
+                listaCursos
+        );
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_tarefa);
+        return adapter;
     }
 
     // Método para salvar a tarefa
@@ -104,7 +117,7 @@ public class TarefaActivity extends AppCompatActivity {
         // Obtém os dados da tarefa a partir dos campos de texto
         String descTarefa = binding.txtDescTarefa.getText().toString().toUpperCase();
         String dataTarefa = binding.txtDataTarefa.getText().toString().toUpperCase();
-        int cursoTarefa = binding.spnTarefa.getSelectedItemPosition();
+        Curso curso = (Curso) binding.spnTarefa.getSelectedItem();
 
         // Verifica se os campos estão vazios
         if (descTarefa.isEmpty() || dataTarefa.isEmpty()) {
@@ -116,10 +129,9 @@ public class TarefaActivity extends AppCompatActivity {
         } else {
             // Cria um objeto Tarefa
             Tarefa tarefa = new Tarefa();
-
             tarefa.setDesc_tarefa(descTarefa);
             tarefa.setData_tarefa(dataTarefa);
-            tarefa.setCurso_tarefa(cursoTarefa);
+            tarefa.setCurso_tarefa(curso.getId_curso());
             tarefa.setContext(this);
 
             long inserted = tarefa.inserir(this);
@@ -143,16 +155,18 @@ public class TarefaActivity extends AppCompatActivity {
             }
         }
     }
+
     // Método para atualizar a tarefa
     public void atualizarTarefa(int id_tarefa) {
         Tarefa tarefa = new Tarefa();
         tarefa.setId_tarefa(id_tarefa);
         tarefa.setDesc_tarefa(binding.txtDescTarefa.getText().toString().toUpperCase());
         tarefa.setData_tarefa(binding.txtDataTarefa.getText().toString().toUpperCase());
-        tarefa.setCurso_tarefa(binding.spnTarefa.getSelectedItemPosition());
+        Curso curso = (Curso) binding.spnTarefa.getSelectedItem();
+        tarefa.setCurso_tarefa(curso.getId_curso());
 
 
-        if(tarefa.atualizar(this) == 1){
+        if (tarefa.atualizar(this) == 1) {
             new AlertDialog.Builder(this)
                     .setTitle("Atenção")
                     .setMessage("Tarefa atualizada com sucesso")
@@ -161,7 +175,7 @@ public class TarefaActivity extends AppCompatActivity {
                     })
                     .show();
 
-        }else{
+        } else {
             new AlertDialog.Builder(this)
                     .setTitle("Atenção")
                     .setMessage("Erro ao atualizar tarefa")

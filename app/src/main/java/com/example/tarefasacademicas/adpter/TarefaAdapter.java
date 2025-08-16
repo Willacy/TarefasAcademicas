@@ -43,9 +43,9 @@ public class TarefaAdapter extends ArrayAdapter<Tarefa> {
 
 
         // Preencher os campos do item da lista com os dados da tarefa
-        Curso curso = new Curso().listar(getContext()).get(tarefa.getCurso_tarefa());
 
         txtItem1.setText(tarefa.getDesc_tarefa());
+        Curso curso = new Curso().buscar(getContext(), tarefa.getCurso_tarefa());
         txtItem2.setText("Curso: " + curso.getDesc_curso());
         txtItem3.setText("Data: " + tarefa.getData_tarefa());
 
