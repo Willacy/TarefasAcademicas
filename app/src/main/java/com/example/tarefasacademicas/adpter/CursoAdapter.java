@@ -55,6 +55,15 @@ public class CursoAdapter extends ArrayAdapter<Curso> {
         });
 
         btnDeletar.setOnClickListener(v -> {
+            if (curso.temTarefa(getContext(), curso.getId_curso())) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Informação!")
+                        .setMessage("Não é possível deletar este curso, " +
+                                "pois existe(m) tarefa(s) ligada(s) a ele.")
+                        .setNegativeButton("ok", null)
+                        .show();
+                return;
+            }
             new AlertDialog.Builder(getContext())
                     .setTitle("Cuidado!")
                     .setMessage("Deseja deletar o curso?")
@@ -63,7 +72,7 @@ public class CursoAdapter extends ArrayAdapter<Curso> {
                         if (curso.deletar(getContext()) == 1) {
                             Toast.makeText(getContext(), "Curso deletado com sucesso", Toast.LENGTH_SHORT).show();
                             remove(curso);
-                        }else{
+                        } else {
                             Toast.makeText(getContext(), "Erro ao deletar curso", Toast.LENGTH_SHORT).show();
                         }
                     })

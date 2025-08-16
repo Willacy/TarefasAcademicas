@@ -94,6 +94,12 @@ public class Curso {
         return cursoDao.deletar(this.id_curso);
     }
 
+    // metodo que verifica se tem tarefa ligada ao curso
+    public boolean temTarefa(Context context, int id_curso) {
+        cursoDao = new CursoDao(context);
+        return cursoDao.temTarefa(id_curso);
+    }
+
     @Override
     public String toString(){
         return desc_curso;

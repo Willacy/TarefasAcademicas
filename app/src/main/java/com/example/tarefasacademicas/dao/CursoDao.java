@@ -81,6 +81,17 @@ public class CursoDao {
         return db.delete("curso", "id_curso = ?", new String[]{String.valueOf(id)});
     }
 
+    // metodo que verifica se tem tarefa ligada ao curso
+    public boolean temTarefa(int id_curso) {
+        Cursor cursor = db.rawQuery("SELECT * FROM tarefa WHERE curso_tarefa = ?", new String[]{String.valueOf(id_curso)});
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            return true;
+        }
+        cursor.close();
+        return false;
+    }
+
     // Fechando o banco de dados
     public void fechar() {
         db.close();

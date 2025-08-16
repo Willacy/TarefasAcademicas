@@ -36,7 +36,6 @@ public class TarefaActivity extends AppCompatActivity {
 
         // Alimentar o spinner
         binding.spnTarefa.setAdapter(alimentarSpinner());
-        binding.spnTarefa.setSelection(-1, true);
 
         // Essa linha configura a captura da data
         binding.txtDataTarefa.setInputType(InputType.TYPE_NULL);
@@ -59,7 +58,6 @@ public class TarefaActivity extends AppCompatActivity {
             binding.btnSalvarTarefa.setText("Salvar");
             binding.txtDescTarefa.setText("");
             binding.txtDataTarefa.setText("");
-            binding.spnTarefa.setSelection(-1, true);
         } else {
             binding.lblTitulo.setText("Atualizar Tarefa");
             binding.btnSalvarTarefa.setText("Atualizar");
@@ -103,12 +101,14 @@ public class TarefaActivity extends AppCompatActivity {
     // Método para alimentar o spinner
     public ArrayAdapter<Curso> alimentarSpinner() {
         List<Curso> listaCursos = curso.listar(this);
+        listaCursos.add(0, new Curso(0, "Selecione um curso", ""));
         ArrayAdapter<Curso> adapter = new ArrayAdapter<>(
                 this,
                 R.layout.spinner_tarefa,
                 listaCursos
         );
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_tarefa);
+        binding.spnTarefa.setSelection(-1, true);
         return adapter;
     }
 
@@ -126,7 +126,14 @@ public class TarefaActivity extends AppCompatActivity {
                     .setMessage("Preencha todos os campos")
                     .setPositiveButton("OK", null)
                     .show();
-        } else {
+
+        } else if(curso.getId_curso() == 0){
+            new AlertDialog.Builder(this)
+                    .setTitle("Atenção")
+                    .setMessage("Selecione um curso!")
+                    .setPositiveButton("OK", null)
+                    .show();
+        }else {
             // Cria um objeto Tarefa
             Tarefa tarefa = new Tarefa();
             tarefa.setDesc_tarefa(descTarefa);
@@ -166,7 +173,13 @@ public class TarefaActivity extends AppCompatActivity {
         tarefa.setCurso_tarefa(curso.getId_curso());
 
 
-        if (tarefa.atualizar(this) == 1) {
+        if(curso.getId_curso() == 0){
+            new AlertDialog.Builder(this)
+                    .setTitle("Atenção")
+                    .setMessage("Selecione um curso!")
+                    .setPositiveButton("OK", null)
+                    .show();
+        }else if (tarefa.atualizar(this) == 1) {
             new AlertDialog.Builder(this)
                     .setTitle("Atenção")
                     .setMessage("Tarefa atualizada com sucesso")
