@@ -114,15 +114,7 @@ public class TarefasFragment extends Fragment {
     public void listarTarefas(){
         List<Tarefa> lista = tarefa.listar(requireContext());
         TarefaAdapter adapter = new TarefaAdapter(requireContext(), lista);
-        if (lista.isEmpty()) {
-            binding.lstTarefas.setVisibility(View.GONE);
-            binding.txtListaVazia.setVisibility(View.VISIBLE);
-            binding.txtListaVazia.setText("Nenhuma tarefa cadastrada");
-        }else {
-            binding.lstTarefas.setAdapter(adapter);
-            binding.lstTarefas.setVisibility(View.VISIBLE);
-            binding.txtListaVazia.setVisibility(View.GONE);
-        }
+        binding.lstTarefas.setAdapter(adapter);
     }
 
     public void onDestroyView() {
@@ -135,5 +127,4 @@ public class TarefasFragment extends Fragment {
         super.onResume();
         listarTarefas();
     }
-
 }

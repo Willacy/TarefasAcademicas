@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.tarefasacademicas.R;
-import com.example.tarefasacademicas.fragments.TarefasFragment;
 import com.example.tarefasacademicas.model.Curso;
 import com.example.tarefasacademicas.model.Tarefa;
 import com.example.tarefasacademicas.view.TarefaActivity;
