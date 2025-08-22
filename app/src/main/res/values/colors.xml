@@ -2,13 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="cor_menu">#283626</color>
+    <color name="cor_menu">#009688</color>
     <color name="cor_fundo">#A1B69F</color>
     <color name="cor_icones">#A0FF97</color>
 
     <!-- Verde principal -->
-    <color name="colorPrimary">#4CAF50</color>
-    <color name="colorPrimaryVariant">#388E3C</color>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryVariant">#FFC107</color>
 
     <!-- Verde secundário -->
     <color name="colorSecondary">#81C784</color>

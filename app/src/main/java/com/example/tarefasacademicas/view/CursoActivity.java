@@ -3,6 +3,7 @@ package com.example.tarefasacademicas.view;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Fade;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.example.tarefasacademicas.R;
 import com.example.tarefasacademicas.databinding.ActivityCursoBinding;
 import com.example.tarefasacademicas.fragments.CursosFragment;
 import com.example.tarefasacademicas.model.Curso;
+import com.google.android.material.transition.MaterialFade;
 
 public class CursoActivity extends AppCompatActivity {
 
@@ -28,6 +30,11 @@ public class CursoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Fade fadeIn = new Fade();
+        fadeIn.setDuration(300);
+        getWindow().setEnterTransition(fadeIn);
+
         super.onCreate(savedInstanceState);
         binding = ActivityCursoBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);

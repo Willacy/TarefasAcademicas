@@ -43,7 +43,7 @@
             android:layout_marginBottom="24dp"
             android:gravity="center"
             android:text="@string/cadastro_de_tarefa"
-            android:textColor="@color/colorPrimaryVariant"
+            android:textColor="@color/colorPrimary"
             android:textSize="26sp"
             android:textStyle="bold" />
 

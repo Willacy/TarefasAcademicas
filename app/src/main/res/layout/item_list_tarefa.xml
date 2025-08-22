@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -16,78 +17,95 @@
         android:elevation="6dp"
         app:cardCornerRadius="12dp"
         app:strokeColor="@color/colorPrimary"
-        app:strokeWidth="2dp">
+        app:strokeWidth="0dp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp"
+            android:padding="2dp"
             android:gravity="center_horizontal">
+
+            <!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginTop="8dp">-->
 
             <TextView
                 android:id="@+id/txtItem1"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:textAlignment="textStart"
+                android:padding="2dp"
                 android:text="item1"
-                android:textColor="@color/colorPrimary"
+                android:textColor="#212121"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:padding="4dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtItem2"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:textAlignment="textStart"
+                android:paddingTop="2dp"
                 android:text="item2"
-                android:textColor="@color/colorPrimaryVariant"
+                android:textColor="#757575"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:paddingTop="2dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtItem1" />
 
             <TextView
                 android:id="@+id/txtItem3"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:textAlignment="textStart"
+                android:paddingTop="2dp"
                 android:text="item3"
-                android:textColor="@color/colorPrimaryVariant"
+                android:textColor="#757575"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:paddingTop="2dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtItem2" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/btnEditar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_edit"
+                android:tint="#212121"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnDeletar"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.None" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/btnEditar"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_edit"
-                    android:contentDescription="@string/todo"
-                    android:tint="@color/colorPrimary"
-                    android:layout_marginEnd="16dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.None" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/btnDeletar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="4dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_delete"
+                android:tint="#D32F2F"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.None" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/btnDeletar"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_delete"
-                    android:contentDescription="@string/todo"
-                    android:tint="@color/colorPrimary"
-                    android:layout_marginStart="16dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.None" />
+            <!--            </LinearLayout>-->
 
-            </LinearLayout>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
