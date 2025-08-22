@@ -20,5 +20,6 @@
     <string name="tarefa">Tarefa</string>
     <string name="data">Data</string>
     <string name="selecione_um_curso">Selecione um curso</string>
+    <string name="usuario">Usuario</string>
 
 </resources>
