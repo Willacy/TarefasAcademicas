@@ -36,7 +36,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.385"
-        app:startIconDrawable="@drawable/ic_user">
+        app:startIconDrawable="@drawable/ic_user"
+        app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -77,7 +78,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtUser"
         app:layout_constraintVertical_bias="0.042"
-        app:startIconDrawable="@drawable/ic_senha">
+        app:startIconDrawable="@drawable/ic_senha"
+        app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

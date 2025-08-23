@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,34 +11,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/lblTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:gravity="center"
+            android:text="@string/lista_de_cursos"
+            android:textColor="@color/colorPrimary"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <!-- Lista de cursos -->
         <ListView
             android:id="@+id/lstCursos"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="100dp"
+            android:clipToPadding="false"
             android:divider="#BDBDBD"
             android:dividerHeight="1dp"
             android:padding="8dp"
-            android:clipToPadding="false"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Botão adicionar curso -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnNovoCurso"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_add_geral"
-            app:fabCustomSize="64dp"
             app:backgroundTint="@color/colorPrimaryVariant"
-            app:tint="@color/white"
+            app:fabCustomSize="64dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp" />
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
