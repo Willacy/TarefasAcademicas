@@ -41,18 +41,6 @@ public class TarefaActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_tarefa);
         return adapter;
     }
-
-//    private void configurarCapturaData() {
-//        binding.txtDataTarefa.setInputType(InputType.TYPE_NULL);
-//        binding.txtDataTarefa.setFocusable(false);
-//        binding.txtDataTarefa.setOnClickListener(v -> {
-//            final Calendar c = Calendar.getInstance();
-//            new DatePickerDialog(this, (view, year, month, day) -> {
-//                String data = String.format("%02d/%02d/%04d", day, month + 1, year);
-//                binding.txtDataTarefa.setText(data);
-//            }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
-//        });
-//    }
 private void configurarCapturaData() {
     binding.txtDataTarefa.setInputType(InputType.TYPE_NULL);
     binding.txtDataTarefa.setFocusable(false);
