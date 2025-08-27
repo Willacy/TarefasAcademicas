@@ -1,5 +1,4 @@
 package com.example.tarefasacademicas.fragments;
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -75,20 +74,18 @@ public class TarefasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Chama o fragmento
         binding = FragmentTarefasBinding.inflate(inflater, container, false);
         listarTarefas();
         return binding.getRoot();
     }
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.btnNovaTarefa.setOnClickListener(v -> {
             List<Curso> cursos = new Curso().listar(getContext());
             if (cursos.isEmpty()) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Atenção")
+                new AlertDialog.Builder(getContext()).setTitle("Atenção")
                         .setMessage("Para cadastrar uma tarefa, é necessario ter pelo menos um " +
                                 "curso cadastrado.\nDeseja cadastrar um curso?")
                         .setPositiveButton("sim", (dialog, which) -> {
@@ -101,7 +98,6 @@ public class TarefasFragment extends Fragment {
             }else{
                 novaTarefa();
             }
-
         });
     }
 

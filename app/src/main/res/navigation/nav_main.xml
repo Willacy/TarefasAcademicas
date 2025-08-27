@@ -16,10 +16,4 @@
         android:label="Cursos"
         tools:layout="@layout/fragment_cursos" />
 
-    <fragment
-        android:id="@+id/menu_agenda"
-        android:name="com.example.tarefasacademicas.fragments.AgendaFragment"
-        android:label="Agenda"
-        tools:layout="@layout/fragment_agenda" />
-
 </navigation>
